@@ -2,9 +2,9 @@ import './App.css';
 import RootLayout from './layouts/RootLayout';
 import {Home} from "./pages/Home";
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom";
-import {Profesor} from "./pages/Profesores";
+import Profesor from "./pages/Profesores";
 import {Cursos} from "./pages/Cursos";
-import {Materias} from "./pages/Materias";
+import Materias from "./pages/Materias";
 import {Lista} from "./pages/Lista";
 import React from "react";
 

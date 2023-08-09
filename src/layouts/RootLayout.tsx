@@ -30,7 +30,7 @@ const RootLayout = () => {
                         {
                             key:'1',
                             icon: <UserOutlined />,
-                            label: (<NavLink to="/">Ingresos</NavLink>),
+                            label: (<NavLink to="/">Ingresos Profesores</NavLink>),
 
                         },
                         {
@@ -41,15 +41,15 @@ const RootLayout = () => {
                         {
                             key:'3',
                             icon: <UserOutlined />,
-                            label: (<NavLink to="/cursos">Cursos</NavLink>),
+                            label: (<NavLink to="/cursos">Ingresos alumnos</NavLink>),
                         },
                         {
                             key:'4',
                             icon: <UserOutlined />,
-                            label: (<NavLink to="/materias">Materias</NavLink>),
+                            label: (<NavLink to="/materias">Alumnos</NavLink>),
                         },
                         {
-                            key:'4',
+                            key:'5',
                             icon: <UserOutlined />,
                             label: (<NavLink to="/lista">Lista</NavLink>),
                         },

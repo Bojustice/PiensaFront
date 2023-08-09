@@ -1,33 +1,113 @@
-import {curso, getCurso} from "../services/Back";
-import useSWR from 'swr';
-import React from "react";
-import AntCard from "../components/AntCard";
-import styles from './profesor.module.css';
+import Input from "antd";
+import axios from "axios";
+import {profesor, createApi} from "../services/Back"
+import { useState } from "react";
 
-
-interface CursoData {
-    results:Array<{
-        id:number;
-        curso:string;
-      
-    }>;
-}
-
-export const Cursos: React.FC = () => {
-    const {data, error} = useSWR<CursoData>( curso, getCurso, {
-        suspense: false,
+export const Cursos = () => {
+    const [post, setPost] = useState({
+        
+        nombres: "",
+        apellidos: "",
+        telefono: 0,
+        email: "",
+        imagen: ""
     });
 
-    return (
-        <>
-        <h1>Cursos</h1>
+    const handleChange = (e:any)=>{
+        const value=e.target.value;
+        setPost({
+            ...post,[e.target.name]:value
+        });
+    };
 
-        <div className={styles.container}>
-            {data?.results.map((curso)=>(
-                <AntCard key={curso.id} nombre={curso.curso}></AntCard>
-            ))}
-        </div>
+    const handleSubmit=(e:any)=>{
+        e.preventDefault();
+        const userData ={
+            nombres: post.nombres,
+            apellidos: post.apellidos,
+            telefono:post.telefono,
+            email: post.email,
+            imagen: post.imagen,
+        };
+        
+        axios.post("http://localhost:8081/alumnos", userData).then((response) => {
+            console.log(response.status, response.data.token);
+          });
+        };
+        return (
+            <div>
+                <h1>Ingresos nuevos alumnos</h1>
+                <form onSubmit={handleSubmit}>
+                    <ul>
+                        <li>
+                    <label htmlFor="nombres">
+                        Nombres
+                        <input
+                        type="nombres"
+                        name="nombres"
+                        value={post.nombres}
+                        onChange={handleChange}
+                        />
+                    </label>
+                    </li><br></br>
+                    <li>
+                    <label htmlFor="apellidos">
+                        Apellidos
+                        <input
+                        type="apellidos"
+                        name="apellidos"
+                        value={post.apellidos}
+                        onChange={handleChange}
+                        />
+                    </label>
+                    </li><br></br>
+                    <li>
+                    <label htmlFor="telefono">
+                        Telefono
+                        <input
+                        type="telefono"
+                        name="telefono"
+                        value={post.telefono}
+                        onChange={handleChange}
+                        />
+                    </label>
+                    </li><br></br>
+                    <li>
+                    <label htmlFor="email">
+                        Email
+                        <input
+                        type="email"
+                        name="email"
+                        value={post.email}
+                        onChange={handleChange}
+                        />
+                    </label>
+                    </li><br></br>
+                    <li>
+                    <label htmlFor="imagen">
+                        Curso
+                        <input
+                        type="imagen"
+                        name="imagen"
+                        value={post.imagen}
+                        onChange={handleChange}
+                        />
+                    </label>
+                    </li><br></br>
+                    <li>
+                    <button type="submit">Ingresar</button>
+                    </li><br></br>
+                    </ul>
+                </form>
+                
+            </div>
+        );
+      
 
-        </>
-    );
-};
+        
+
+        
+
+
+    }
+    
